@@ -1,17 +1,17 @@
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
-console.log(process.env.DB_CONNECTION_STRING);
 const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING, {
-	logging: process.env.NODE_ENV == "production" ? false : console.log,
+	logging: process.env.NODE_ENV == "development" ? console.log : false,
 });
 
 sequelize
 	.authenticate()
 	.then((_) => {
-		console.log("DB connected");
+		console.log("Db connection succcess");
 	})
-	.catch((err) => {
-		console.log("DB connection failed with error ", err);
+	.catch((_) => {
+		console.log("DBconnection failed");
 	});
 
 module.exports = sequelize;
